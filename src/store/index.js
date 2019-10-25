@@ -3,9 +3,26 @@ import Vuex from "vuex";
 
 Vue.use(Vuex);
 
-export default new Vuex.Store({
-  state: {},
+export const store = new Vuex.Store({
+  state: {
+    contacts:[
+      {
+        id:1,
+        name:'Marko',
+        email:'marko@marko.com'
+      },
+      {
+        id:2,
+        name:'Ivan',
+        email:'ivan@ivan.com'
+      }
+    ]
+  },
   mutations: {},
   actions: {},
-  modules: {}
+  getters: {
+    getContacts (state) {
+      return state.contacts
+    }
+  }
 });
