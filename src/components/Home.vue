@@ -4,11 +4,13 @@
       <v-subheader>Today</v-subheader>
 
       <v-expansion-panels popout>
-        <v-expansion-panel 
-        v-for="(contact, i) in showedContacts" 
-        :showedContacts="showedContacts"
-        :currentPage="currentPage"
-        :key="i" hide-actions>
+        <v-expansion-panel
+          v-for="(contact, i) in showedContacts"
+          :showedContacts="showedContacts"
+          :currentPage="currentPage"
+          :key="i"
+          hide-actions
+        >
           <v-expansion-panel-header>
             <v-row align="center" class="spacer" no-gutters>
               <v-col cols="4" sm="2" md="1">
@@ -37,38 +39,44 @@
         </v-expansion-panel>
       </v-expansion-panels>
     </v-row>
-    <pagination :pageSize="pageSize"/>
+    <pagination @clicked="onChildClick" :pageSize="pageSize" />
   </v-container>
 </template>
 
 <script>
-import Pagination from './Pagination.vue'
+import Pagination from "./Pagination.vue";
 
 export default {
   data() {
     return {
+      pageSize: 4,
       currentPage: 0,
-      pageSize: 2,
       showedContacts: []
     };
   },
   components: {
     Pagination
   },
-  beforeMount: function () {
+  beforeMount: function() {
     this.updateShowedContacts();
   },
   methods: {
-    updatePage (pageNumber) {
+    onChildClick(value) {
+      let $this = this;
+      $this.currentPage = value - 1;
+      this.updateShowedContacts();
+    },
+    updatePage(pageNumber) {
       this.currentPage = pageNumber;
       this.updateShowedContacts();
     },
-    updateShowedContacts () {
-      this.showedContacts = this.contacts
-      .slice(this.currentPage * this.pageSize, 
-      (this.currentPage * this.pageSize) + this.pageSize);
+    updateShowedContacts() {
+      this.showedContacts = this.contacts.slice(
+        this.currentPage * this.pageSize,
+        this.currentPage * this.pageSize + this.pageSize
+      );
       if (this.showedContacts.length == 0 && this.currentPage > 0) {
-        this.updatePage (this.currentPage - 1)
+        this.updatePage(this.currentPage - 1);
       }
     }
   },
@@ -86,7 +94,7 @@ export default {
 }
 .v-card__text,
 .v-card__title {
-  padding: 6px!important;
+  padding: 6px !important;
 }
 .theme--light.v-expansion-panels .v-expansion-panel {
   margin-bottom: 10px;
