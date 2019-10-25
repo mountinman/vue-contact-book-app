@@ -69,6 +69,13 @@ export const store = new Vuex.Store({
   getters: {
     getContacts (state) {
       return state.contacts
+    },
+    getContactDetails (state) {
+      return contactId => {
+        return state.contacts.find(contact => {
+          return contact.id === contactId
+        })
+      }
     }
   }
 });

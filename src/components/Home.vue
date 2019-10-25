@@ -35,6 +35,9 @@
               <strong>Address:</strong>
               {{contact.address}}
             </v-card-text>
+            <router-link
+              :to="{ name: 'ContactDetails', params: { id: contact.id }}"
+            >VIEW MORE</router-link>
           </v-expansion-panel-content>
         </v-expansion-panel>
       </v-expansion-panels>
