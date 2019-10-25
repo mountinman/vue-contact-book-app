@@ -22,42 +22,42 @@ export const store = new Vuex.Store({
       },
       {
         id:3,
-        name:'Ivan',
+        name:'Matija',
         email:'ivan@ivan.com',
         address:'otvoreno more bb',
         avatar:'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460'
       },
       {
         id:4,
-        name:'Ivan',
+        name:'Kruno',
         email:'ivan@ivan.com',
         address:'otvoreno more bb',
         avatar:'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460'
       },
       {
         id:5,
-        name:'Ivan',
+        name:'Branimir',
         email:'ivan@ivan.com',
         address:'otvoreno more bb',
         avatar:'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460'
       },
       {
         id:6,
-        name:'Ivan',
+        name:'Ana',
         email:'ivan@ivan.com',
         address:'otvoreno more bb',
         avatar:'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460'
       },
       {
         id:7,
-        name:'Ivan',
+        name:'Zlatko',
         email:'ivan@ivan.com',
         address:'otvoreno more bb',
         avatar:'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460'
       },
       {
         id:8,
-        name:'Ivan',
+        name:'Kristina',
         email:'ivan@ivan.com',
         address:'otvoreno more bb',
         avatar:'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460'

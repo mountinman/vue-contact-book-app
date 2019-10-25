@@ -37,10 +37,13 @@
         </v-expansion-panel>
       </v-expansion-panels>
     </v-row>
+    <pagination />
   </v-container>
 </template>
 
 <script>
+import Pagination from './Pagination.vue'
+
 export default {
   data() {
     return {
@@ -48,6 +51,9 @@ export default {
       pageSize: 4,
       showedContacts: []
     };
+  },
+  components: {
+    Pagination
   },
   beforeMount: function () {
     this.updateShowedContacts();
@@ -80,7 +86,7 @@ export default {
 }
 .v-card__text,
 .v-card__title {
-  padding: 6px;
+  padding: 6px!important;
 }
 .theme--light.v-expansion-panels .v-expansion-panel {
   margin-bottom: 10px;
