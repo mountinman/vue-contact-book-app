@@ -9,12 +9,14 @@ export const store = new Vuex.Store({
       {
         id:1,
         name:'Marko',
-        email:'marko@marko.com'
+        email:'marko@marko.com',
+        avatar:'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460'
       },
       {
         id:2,
         name:'Ivan',
-        email:'ivan@ivan.com'
+        email:'ivan@ivan.com',
+        avatar:'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460'
       }
     ]
   },
