@@ -22,7 +22,7 @@ export default {
     return {
       dynamicMenu:[
         {icon: 'mdi-home', title: 'HOME', link: '/'},
-        {icon: 'mdi-account-plus',title: 'ADD CONTACT', link: '/add-contact'} 
+        {icon: 'mdi-account-card-details-outline',title: 'ADD CONTACT', link: '/add-contact'} 
       ]
     };
   }

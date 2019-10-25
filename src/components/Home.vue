@@ -1,10 +1,9 @@
 <template>
   <v-container fluid>
-    <v-row justify="center">
-      <v-subheader>Today</v-subheader>
-
-      <v-expansion-panels popout>
-        <v-expansion-panel
+    <v-row>
+      <v-expansion-panels :value="0">
+  
+        <v-expansion-panel 
           v-for="(contact, i) in showedContacts"
           :showedContacts="showedContacts"
           :currentPage="currentPage"
@@ -28,16 +27,17 @@
           <v-expansion-panel-content>
             <v-divider></v-divider>
             <v-card-text>
-              <strong>Email:</strong>
+              <strong><v-icon>mdi-email</v-icon></strong>
               {{contact.email}}
             </v-card-text>
             <v-card-text>
-              <strong>Address:</strong>
-              {{contact.address}}
+              <strong><v-icon>mdi-contact-phone-outline</v-icon></strong>
+              {{contact.phone}}
             </v-card-text>
             <router-link
+              class="view-more-btn"
               :to="{ name: 'ContactDetails', params: { id: contact.id }}"
-            >VIEW MORE</router-link>
+            >VIEW DETAILS</router-link>
           </v-expansion-panel-content>
         </v-expansion-panel>
       </v-expansion-panels>
@@ -92,12 +92,27 @@ export default {
 </script>
 
 <style>
+.v-icon.v-icon {
+  font-size: 19px;
+}
+a.view-more-btn {
+  text-decoration: none;
+  padding: 6px;
+  background: yellowgreen;
+  border-radius: 6px;
+  display: inline-block;
+  margin-top: 12px;
+  color: white !important;
+  font-weight: 400;
+  font-size: 13px;
+}
+
 .v-item-group {
-  margin-top: 50px;
+  margin-top: 100px;
 }
 .v-card__text,
 .v-card__title {
-  padding: 6px !important;
+  padding: 2px !important;
 }
 .theme--light.v-expansion-panels .v-expansion-panel {
   margin-bottom: 10px;

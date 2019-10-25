@@ -29,4 +29,7 @@ export default {
 .theme--light.v-pagination .v-pagination__item {
   outline: none;
 }
+.theme--light.v-pagination .v-pagination__navigation {
+  outline: none;
+}
 </style>
