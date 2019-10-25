@@ -4,7 +4,11 @@
       <v-subheader>Today</v-subheader>
 
       <v-expansion-panels popout>
-        <v-expansion-panel v-for="(contact, i) in contacts" :key="i" hide-actions>
+        <v-expansion-panel 
+        v-for="(contact, i) in showedContacts" 
+        :showedContacts="showedContacts"
+        :currentPage="currentPage"
+        :key="i" hide-actions>
           <v-expansion-panel-header>
             <v-row align="center" class="spacer" no-gutters>
               <v-col cols="4" sm="2" md="1">
@@ -21,7 +25,14 @@
 
           <v-expansion-panel-content>
             <v-divider></v-divider>
-            <v-card-text>{{contact.email}}</v-card-text>
+            <v-card-text>
+              <strong>Email:</strong>
+              {{contact.email}}
+            </v-card-text>
+            <v-card-text>
+              <strong>Address:</strong>
+              {{contact.address}}
+            </v-card-text>
           </v-expansion-panel-content>
         </v-expansion-panel>
       </v-expansion-panels>
@@ -31,6 +42,30 @@
 
 <script>
 export default {
+  data() {
+    return {
+      currentPage: 0,
+      pageSize: 4,
+      showedContacts: []
+    };
+  },
+  beforeMount: function () {
+    this.updateShowedContacts();
+  },
+  methods: {
+    updatePage (pageNumber) {
+      this.currentPage = pageNumber;
+      this.updateShowedContacts();
+    },
+    updateShowedContacts () {
+      this.showedContacts = this.contacts
+      .slice(this.currentPage * this.pageSize, 
+      (this.currentPage * this.pageSize) + this.pageSize);
+      if (this.showedContacts.length == 0 && this.currentPage > 0) {
+        this.updatePage (this.currentPage - 1)
+      }
+    }
+  },
   computed: {
     contacts() {
       return this.$store.getters.getContacts;
@@ -40,7 +75,14 @@ export default {
 </script>
 
 <style>
-.v-item-group{
+.v-item-group {
   margin-top: 50px;
+}
+.v-card__text,
+.v-card__title {
+  padding: 6px;
+}
+.theme--light.v-expansion-panels .v-expansion-panel {
+  margin-bottom: 10px;
 }
 </style>
