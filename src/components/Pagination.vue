@@ -2,7 +2,7 @@
   <div class="text-center">
     <v-pagination
       v-model="page"
-      :length="4"
+      :length="numberOfPages()"
       circle
     ></v-pagination>
   </div>
@@ -11,11 +11,17 @@
 <script>
 export default {
     name: 'Pagination',
+    props: ['pageSize'],
     data () {
       return {
         page: 1,
       }
     },
+    methods: {
+        numberOfPages () {
+            return this.$store.getters.getContacts.length / this.pageSize;
+        }
+    }
   }
 </script>
 

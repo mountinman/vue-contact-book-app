@@ -37,7 +37,7 @@
         </v-expansion-panel>
       </v-expansion-panels>
     </v-row>
-    <pagination />
+    <pagination :pageSize="pageSize"/>
   </v-container>
 </template>
 
@@ -48,7 +48,7 @@ export default {
   data() {
     return {
       currentPage: 0,
-      pageSize: 4,
+      pageSize: 2,
       showedContacts: []
     };
   },
