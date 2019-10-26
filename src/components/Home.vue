@@ -45,7 +45,7 @@
     <pagination @clicked="onChildClick" :pageSize="pageSize" />
 
   </v-container>
-</template>
+</template>  
 
 <script>
 import Pagination from "./Pagination.vue";
@@ -53,6 +53,7 @@ import Pagination from "./Pagination.vue";
 export default {
   data() {
     return {
+      contact:[],
       pageSize: 4,
       currentPage: 0,
       showedContacts: []
@@ -88,10 +89,8 @@ export default {
       }
     }
   },
-  computed: {
-    contacts() {
-      return this.$store.getters.getContacts;
-    }
+  created () {
+    this.contacts = this.$store.getters.getContacts;
   }
 };
 </script>

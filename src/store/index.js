@@ -1,9 +1,11 @@
 import Vue from "vue";
 import Vuex from "vuex";
 
+
 Vue.use(Vuex);
 
 export const store = new Vuex.Store({
+  
   state: {
     contacts: [
       {
@@ -64,6 +66,7 @@ export const store = new Vuex.Store({
       }
     ]
   },
+  
   mutations: {
     deleteContact(state, contactId) {
       const indexToDelete = state.contacts.findIndex(

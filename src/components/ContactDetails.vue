@@ -23,17 +23,33 @@
 
 <script>
 export default {
+  data() {
+    return {
+      contacts: [],
+    };
+  }, 
   props: ["id"],
-  computed: {
-    contact() {
-      return this.$store.getters.getContactDetails(this.id);
+  
+  created() {
+    this.contacts = this.$store.getters.getContacts;
+  },
+  computed:{
+    contact () {
+      return this.contacts.find(contact => {
+        contact.id === this.id
+      })
     }
   },
+  beforeMount () {
+   
+  },
+  
+  
   methods: {
-    editContact() {
+    editContact() { 
       alert("edit");
     },
-    deleteContact (contactId) {
+    deleteContact(contactId) {
       this.$store.commit("deleteContact", contactId);
       this.$router.push("/");
     }
