@@ -1,8 +1,8 @@
 <template>
   <v-container fluid>
     <v-row>
+
       <v-expansion-panels :value="0">
-  
         <v-expansion-panel 
           v-for="(contact, i) in showedContacts"
           :showedContacts="showedContacts"
@@ -43,6 +43,7 @@
       </v-expansion-panels>
     </v-row>
     <pagination @clicked="onChildClick" :pageSize="pageSize" />
+
   </v-container>
 </template>
 
@@ -64,6 +65,10 @@ export default {
     this.updateShowedContacts();
   },
   methods: {
+    goBack () {
+      window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
+
+    },
     onChildClick(value) {
       let $this = this;
       $this.currentPage = value - 1;
@@ -92,6 +97,9 @@ export default {
 </script>
 
 <style>
+.container{
+  padding: 50px;
+}
 .v-icon.v-icon {
   font-size: 19px;
 }
@@ -106,7 +114,6 @@ a.view-more-btn {
   font-weight: 400;
   font-size: 13px;
 }
-
 .v-item-group {
   margin-top: 100px;
 }

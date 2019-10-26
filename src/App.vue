@@ -1,6 +1,6 @@
 <template>
   <v-app>
-     <v-app-bar app>
+    <v-app-bar app>
       <v-toolbar-title>
         <router-link to="/" tag="span" style="cursor: pointer">CONTACTBookApp</router-link>
       </v-toolbar-title>
@@ -11,7 +11,7 @@
       </v-btn>
     </v-app-bar>
     <main>
-      <router-view></router-view>
+        <router-view></router-view>
     </main>
   </v-app>
 </template>
@@ -20,9 +20,13 @@
 export default {
   data() {
     return {
-      dynamicMenu:[
-        {icon: 'mdi-home', title: 'HOME', link: '/'},
-        {icon: 'mdi-account-card-details-outline',title: 'ADD CONTACT', link: '/add-contact'} 
+      dynamicMenu: [
+        { icon: "mdi-home", title: "HOME", link: "/" },
+        {
+          icon: "mdi-account-card-details-outline",
+          title: "ADD CONTACT",
+          link: "/add-contact"
+        }
       ]
     };
   }
@@ -30,6 +34,4 @@ export default {
 </script>
 
 <style>
-
-  
 </style>

@@ -14,16 +14,17 @@ export default new Router({
       component: Home
     },
     {
-      path: "/add-contact",
-      name: "AddContact",
-      component: AddContact
-    },
-    {
       path: "/contact/:id",
       name: "ContactDetails",
       props: true,
       component: ContactDetails
+    },
+    {
+      path: "/add-contact",
+      name: "AddContact",
+      component: AddContact
     }
+   
   ],
   mode: "history"
 });
