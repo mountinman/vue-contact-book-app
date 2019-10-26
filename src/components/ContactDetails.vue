@@ -25,28 +25,22 @@
 export default {
   data() {
     return {
-      contacts: [],
+      contacts: []
     };
-  }, 
+  },
   props: ["id"],
-  
+
   created() {
     this.contacts = this.$store.getters.getContacts;
   },
-  computed:{
-    contact () {
-      return this.contacts.find(contact => {
-        contact.id === this.id
-      })
+  computed: {
+    contact() {
+      return this.contacts.find(contact => contact.id == this.id);
     }
   },
-  beforeMount () {
-   
-  },
-  
-  
+
   methods: {
-    editContact() { 
+    editContact() {
       alert("edit");
     },
     deleteContact(contactId) {
