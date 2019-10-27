@@ -11,7 +11,7 @@
       </v-btn>
     </v-app-bar>
     <main>
-        <router-view></router-view>
+      <router-view></router-view>
     </main>
   </v-app>
 </template>
@@ -21,7 +21,11 @@ export default {
   data() {
     return {
       dynamicMenu: [
-        { icon: "mdi-home", title: "HOME", link: "/" },
+        { 
+          icon: "mdi-home", 
+          title: "HOME", 
+          link: "/" 
+        },
         {
           icon: "mdi-account-card-details-outline",
           title: "ADD CONTACT",

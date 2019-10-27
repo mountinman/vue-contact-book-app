@@ -2,9 +2,9 @@ import Vue from "vue";
 import Vuex from "vuex";
 
 
-Vue.use(Vuex);
+Vue.use (Vuex);
 
-export const store = new Vuex.Store({
+export const store = new Vuex.Store ({
   
   state: {
     contacts: [
@@ -68,21 +68,23 @@ export const store = new Vuex.Store({
   },
   
   mutations: {
-    deleteContact(state, contactId) {
+    deleteContact (state, contactId) {
       const indexToDelete = state.contacts.findIndex(
         contact => contact.id === contactId
       );
       state.contacts.splice(indexToDelete, 1);
+    },
+    addContact (state) {
+      let lastContactsItem = state.contacts.length - 1;
+      let lastUsedId = state.contacts[lastContactsItem].id;
+      const newId = lastUsedId + 1;
+      console.log(newId);
     }
   },
   actions: {},
   getters: {
-    getContacts(state) {
+    getContacts (state) {
       return state.contacts;
-    },
-    getContactDetails(state) {
-      return contactId =>
-        state.contacts.find(contact => contact.id === contactId);
     }
   }
 });

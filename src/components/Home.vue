@@ -42,7 +42,7 @@
         </v-expansion-panel>
       </v-expansion-panels>
     </v-row>
-    <pagination @clicked="onChildClick" :pageSize="pageSize" />
+    <pagination @clicked="paginatePageNumber" :pageSize="pageSize" />
 
   </v-container>
 </template>  
@@ -53,7 +53,6 @@ import Pagination from "./Pagination.vue";
 export default {
   data() {
     return {
-      contact:[],
       pageSize: 4,
       currentPage: 0,
       showedContacts: []
@@ -66,11 +65,7 @@ export default {
     this.updateShowedContacts();
   },
   methods: {
-    goBack () {
-      window.history.length > 1 ? this.$router.go(-1) : this.$router.push('/')
-
-    },
-    onChildClick(value) {
+    paginatePageNumber(value) {
       let $this = this;
       $this.currentPage = value - 1;
       this.updateShowedContacts();
@@ -97,7 +92,9 @@ export default {
 
 <style>
 .container{
-  padding: 50px;
+  padding: 30px;
+  width: 800px;
+  margin: 0 auto;
 }
 .v-icon.v-icon {
   font-size: 19px;

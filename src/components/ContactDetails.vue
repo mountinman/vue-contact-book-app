@@ -14,22 +14,39 @@
       </v-list-item>
 
       <v-card-actions>
-        <v-btn @click="editContact" text>EDIT</v-btn>
-        <v-btn @click="deleteContact(contact.id)" text>DELETE</v-btn>
+        <div>
+          <v-btn class="mr-4" @click="editContact" text>EDIT</v-btn>
+          <v-btn class="mr-4" @click="deleteContact" text>DELETE</v-btn>
+        </div>
+        <v-btn class="mr-4" @click="backToAllContacts" text>BACK TO ALL CONTACTS</v-btn>
       </v-card-actions>
     </v-card>
+    <div class="alert">
+    <v-alert
+      v-model="alert"
+      elevation="2"
+      colored-border
+      icon="mdi-delete-forever"
+    >
+      Are you sure you want to delete user <strong>{{contact.name}}</strong>?
+      <v-btn @click="confirmDelete(contact.id)">CONFIRM</v-btn>
+    </v-alert>
+
+   
+  </div>
   </v-container>
+  
 </template>
 
 <script>
 export default {
+  props: ["id"],
   data() {
     return {
+      alert: false,
       contacts: []
     };
   },
-  props: ["id"],
-
   created() {
     this.contacts = this.$store.getters.getContacts;
   },
@@ -38,20 +55,37 @@ export default {
       return this.contacts.find(contact => contact.id == this.id);
     }
   },
-
   methods: {
+    backToAllContacts() {
+      this.$router.push('/')
+    },
     editContact() {
       alert("edit");
     },
-    deleteContact(contactId) {
-      this.$store.commit("deleteContact", contactId);
-      this.$router.push("/");
+    deleteContact() {
+      this.alert = true;
+      
+      
+    },
+    confirmDelete (contactId) {
+      this.alert = false;
+       this.$store.commit("deleteContact", contactId);
+      
+        this.$router.push("/");
+      
     }
   }
 };
 </script>
 
 <style>
+.alert{
+  margin-top: 50px;
+}
+.v-card__actions{
+  display: flex;
+  justify-content: space-between;
+}
 .mx-auto {
   margin-top: 100px;
 }
