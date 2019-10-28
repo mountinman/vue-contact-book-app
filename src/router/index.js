@@ -3,6 +3,8 @@ import Router from "vue-router";
 import Home from "@/components/Home";
 import ContactDetails from "@/components/ContactDetails";
 import AddContact from "@/components/AddContact";
+import EditContact from "@/components/EditContact";
+
 
 Vue.use(Router);
 
@@ -23,8 +25,13 @@ export default new Router({
       path: "/add-contact",
       name: "AddContact",
       component: AddContact
+    },
+    {
+      path: "/contact/:id/edit",
+      name: "EditContact",
+      props: true,
+      component: EditContact
     }
-   
   ],
   mode: "history"
 });

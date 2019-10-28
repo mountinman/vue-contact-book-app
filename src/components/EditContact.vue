@@ -2,7 +2,7 @@
   <div class="add-contact-form">
     <form @submit.prevent="addContact">
       <v-text-field
-        v-model="name"
+        v-model="contact.name"
         :error-messages="nameErrors"
         label="Name"
         required
@@ -10,16 +10,16 @@
         @blur="$v.name.$touch()"
       ></v-text-field>
       <v-text-field
-        v-model="email"
+        v-model="contact.email"
         :error-messages="emailErrors"
         label="E-mail"
         required
         @input="$v.email.$touch()"
         @blur="$v.email.$touch()"
       ></v-text-field>
-      <div v-for="(phone, i) in phones" :key="i">
+      <div v-for="(phone, i) in contact.phones" :key="i">
         <v-text-field
-          v-model="phones[i]"
+          v-model="contact.phones[i]"
           :error-messages="phoneErrors"
           label="Phone"
           required
@@ -30,12 +30,12 @@
           <span
             style="cursor:pointer;"
             @click="addPhone(i)"
-            v-show="i == phones.length - 1"
+            v-show="i == contact.phones.length - 1"
           >+ add phone</span>
           <span
             style="cursor:pointer;"
             @click="removePhone(i)"
-            v-show="i || (!i && phones.length > 1)"
+            v-show="i || (!i && contact.phones.length > 1)"
           >- remove phone</span>
         </div>
       </div>
@@ -59,15 +59,19 @@ export default {
     email: { required, email },
     phones: { required }
   },
-
-  data: () => ({
-    name: "",
-    email: "",
-    phones: [""],
-    imgUrl: "https://avatars0.githubusercontent.com/u/9064066?v=4&s=460"
-  }),
-
+  props: ["id"],
+  data() {
+    return {
+      contacts: []
+    };
+  },
+  created() {
+    this.contacts = this.$store.getters.getContacts;
+  },
   computed: {
+    contact() {
+      return this.contacts.find(contact => contact.id == this.id);
+    },
     nameErrors() {
       const errors = [];
       if (!this.$v.name.$dirty) return errors;
@@ -90,24 +94,12 @@ export default {
       return errors;
     }
   },
-
   methods: {
     addPhone(index) {
-      this.phones.push(this.phones[index].phone);
+      this.contact.phones.push(this.contact.phones[index].phone);
     },
     removePhone(index) {
-      this.phones.splice(index, 1);
-    },
-    addContact() {
-      let contact = {
-        name: this.name,
-        email: this.email,
-        phones: this.phones,
-        avatar: this.imgUrl
-      };
-
-      this.$store.commit("addContact", contact);
-      this.$router.push("/");
+      this.contact.phones.splice(index, 1);
     },
     submit() {
       this.$v.$touch();
@@ -123,18 +115,4 @@ export default {
 </script>
 
 <style>
-.phone-control {
-  display: flex;
-  justify-content: space-between;
-}
-.form-btn {
-  margin-top: 35px;
-}
-.add-contact-form {
-  max-width: 600px;
-  margin: 150px auto;
-  padding: 50px;
-  border: 1px solid darkgray;
-  border-radius: 10px;
-}
 </style>

@@ -61,7 +61,7 @@ export default {
       this.$router.push("/");
     },
     editContact() {
-      alert("edit");
+      this.$router.push('/contact/' + this.id + '/edit');
     },
     deleteContact() {
       this.alert = true;
