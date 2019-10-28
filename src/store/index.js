@@ -2,12 +2,16 @@ import Vue from "vue";
 import Vuex from "vuex";
 import VueLodash from "vue-lodash";
 import _ from "lodash";
+import VuexLocalStorage from "../localStorage";
+
 
 Vue.use(VueLodash);
 
 Vue.use(Vuex);
 
+
 export const store = new Vuex.Store({
+  plugins: [VuexLocalStorage],
   state: {
     contacts: [
       {
@@ -38,7 +42,8 @@ export const store = new Vuex.Store({
         phones: ["+385 99 789 453"],
         avatar: "https://avatars0.githubusercontent.com/u/9064066?v=4&s=460"
       }
-    ]
+    ],
+    copyContacts: []
   },
 
   mutations: {
@@ -62,8 +67,10 @@ export const store = new Vuex.Store({
       return state.contacts;
     },
     getContactsCopy(state) {
-      const postDataCopy = _.cloneDeep(state.contacts);
-      return postDataCopy;
+      let postDataCopy = _.cloneDeep(state.contacts);
+      return state.copyContacts = postDataCopy;
+
     }
   }
+  
 });

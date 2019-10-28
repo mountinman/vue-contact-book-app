@@ -66,6 +66,7 @@ export default {
   beforeMount: function() {
     this.updateShowedContacts();
   },
+  
   methods: {
     paginatePageNumber(value) {
       let $this = this;

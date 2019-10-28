@@ -61,9 +61,9 @@ export default {
     this.contacts = this.$store.getters.getContactsCopy;
   },
   computed: {
-     contact() {
-       return this.contacts.find(contact => contact.id == this.id);
-     },
+    contact() {
+      return this.contacts.find(contact => contact.id == this.id);
+    },
     nameErrors() {
       const errors = [];
       if (!this.$v.name.$dirty) return errors;
@@ -100,8 +100,8 @@ export default {
       this.$v.$touch();
     },
     cancelUpdate() {
-    this.contacts = this.$store.getters.getContacts;
       this.$router.push("/");
+      this.$router.go();
     }
   }
 };
