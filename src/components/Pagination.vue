@@ -16,7 +16,7 @@ export default {
   },
   methods: {
     numberOfPages() {
-      return Math.round(this.$store.getters.getContacts.length / this.pageSize);
+      return Math.ceil(this.$store.getters.getContacts.length / this.pageSize);
     },
     pageNumber() {
       this.$emit("clicked", this.page);

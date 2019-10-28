@@ -1,9 +1,8 @@
 <template>
   <v-container fluid>
     <v-row>
-
       <v-expansion-panels :value="0">
-        <v-expansion-panel 
+        <v-expansion-panel
           v-for="(contact, i) in showedContacts"
           :showedContacts="showedContacts"
           :currentPage="currentPage"
@@ -27,12 +26,16 @@
           <v-expansion-panel-content>
             <v-divider></v-divider>
             <v-card-text>
-              <strong><v-icon>mdi-email</v-icon></strong>
+              <strong>
+                <v-icon>mdi-email</v-icon>
+              </strong>
               {{contact.email}}
             </v-card-text>
             <v-card-text>
-              <strong><v-icon>mdi-contact-phone-outline</v-icon></strong>
-              {{contact.phone}}
+              <strong>
+                <v-icon>mdi-contact-phone-outline</v-icon>
+              </strong>
+              {{contact.phones[0]}}
             </v-card-text>
             <router-link
               class="view-more-btn"
@@ -43,7 +46,6 @@
       </v-expansion-panels>
     </v-row>
     <pagination @clicked="paginatePageNumber" :pageSize="pageSize" />
-
   </v-container>
 </template>  
 
@@ -84,14 +86,14 @@ export default {
       }
     }
   },
-  created () {
+  created() {
     this.contacts = this.$store.getters.getContacts;
   }
 };
 </script>
 
 <style>
-.container{
+.container {
   padding: 30px;
   width: 800px;
   margin: 0 auto;

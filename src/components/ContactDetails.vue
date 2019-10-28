@@ -5,7 +5,10 @@
         <v-list-item-content>
           <div class="overline mb-4">CONTACT DETAILS</div>
           <v-list-item-title class="headline mb-1">{{contact.name}}</v-list-item-title>
-          <v-list-item-subtitle>Greyhound divisely hello coldly fonwderfully</v-list-item-subtitle>
+          <v-list-item-subtitle v-for="(phone, i) in contact.phones" :key="i">
+            <span v-if="contact.phones.length <= 1">Phone: {{phone}}</span>
+           <span v-if="contact.phones.length > 1">Phone{{i + 1}}: {{phone}}</span> 
+          </v-list-item-subtitle>
         </v-list-item-content>
 
         <v-avatar size="76px">
@@ -22,20 +25,15 @@
       </v-card-actions>
     </v-card>
     <div class="alert">
-    <v-alert
-      v-model="alert"
-      elevation="2"
-      colored-border
-      icon="mdi-delete-forever"
-    >
-      Are you sure you want to delete user <strong>{{contact.name}}</strong>?
-      <v-btn @click="confirmDelete(contact.id)">CONFIRM</v-btn>
-    </v-alert>
-
-   
-  </div>
+      <v-alert v-model="alert" elevation="2" colored-border>
+        <p>Are you sure you want to delete user {{contact.name}}?</p>
+        <div>
+          <v-btn style="margin-right:10px;" @click="confirmDelete(contact.id)">CONFIRM</v-btn>
+          <v-btn @click="cancelDelete">CANCEL</v-btn>
+        </div>
+      </v-alert>
+    </div>
   </v-container>
-  
 </template>
 
 <script>
@@ -56,33 +54,36 @@ export default {
     }
   },
   methods: {
+    cancelDelete() {
+      this.alert = false;
+    },
     backToAllContacts() {
-      this.$router.push('/')
+      this.$router.push("/");
     },
     editContact() {
       alert("edit");
     },
     deleteContact() {
       this.alert = true;
-      
-      
     },
-    confirmDelete (contactId) {
+    confirmDelete(contactId) {
       this.alert = false;
-       this.$store.commit("deleteContact", contactId);
-      
-        this.$router.push("/");
-      
+      this.$store.commit("deleteContact", contactId);
+      this.$router.push("/");
     }
   }
 };
 </script>
 
 <style>
-.alert{
+.v-alert__content {
+  display: flex;
+  justify-content: space-between;
+}
+.alert {
   margin-top: 50px;
 }
-.v-card__actions{
+.v-card__actions {
   display: flex;
   justify-content: space-between;
 }
