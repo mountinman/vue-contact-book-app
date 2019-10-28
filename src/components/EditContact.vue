@@ -1,6 +1,6 @@
 <template>
   <div class="add-contact-form">
-    <form @submit.prevent="addContact">
+    <form @submit.prevent="updateContact">
       <v-text-field
         v-model="contact.name"
         :error-messages="nameErrors"
@@ -27,21 +27,13 @@
           @blur="$v.phones.$touch()"
         ></v-text-field>
         <div class="phone-control">
-          <span
-            style="cursor:pointer;"
-            @click="addPhone(i)"
-            v-show="i == contact.phones.length - 1"
-          >+ add phone</span>
-          <span
-            style="cursor:pointer;"
-            @click="removePhone(i)"
-            v-show="i || (!i && contact.phones.length > 1)"
-          >- remove phone</span>
+          <span style="cursor:pointer;" @click="removePhone(i)" v-show="i">- remove phone</span>
         </div>
+        <v-btn v-show="i <= 0" @click="addPhone(i)">ADD PHONES</v-btn>
       </div>
       <div class="form-btn">
         <v-btn class="mr-4" type="submit">SAVE</v-btn>
-        <v-btn @click="clear">CLEAR</v-btn>
+        <v-btn @click="cancelUpdate">CANCEL</v-btn>
       </div>
     </form>
   </div>
@@ -66,12 +58,12 @@ export default {
     };
   },
   created() {
-    this.contacts = this.$store.getters.getContacts;
+    this.contacts = this.$store.getters.getContactsCopy;
   },
   computed: {
-    contact() {
-      return this.contacts.find(contact => contact.id == this.id);
-    },
+     contact() {
+       return this.contacts.find(contact => contact.id == this.id);
+     },
     nameErrors() {
       const errors = [];
       if (!this.$v.name.$dirty) return errors;
@@ -98,17 +90,18 @@ export default {
     addPhone(index) {
       this.contact.phones.push(this.contact.phones[index].phone);
     },
+    updateContact() {
+      this.$router.push("/");
+    },
     removePhone(index) {
       this.contact.phones.splice(index, 1);
     },
     submit() {
       this.$v.$touch();
     },
-    clear() {
-      this.$v.$reset();
-      this.name = "";
-      this.email = "";
-      this.phones = [""];
+    cancelUpdate() {
+    this.contacts = this.$store.getters.getContacts;
+      this.$router.push("/");
     }
   }
 };

@@ -1,5 +1,9 @@
 import Vue from "vue";
 import Vuex from "vuex";
+import VueLodash from "vue-lodash";
+import _ from "lodash";
+
+Vue.use(VueLodash);
 
 Vue.use(Vuex);
 
@@ -8,21 +12,21 @@ export const store = new Vuex.Store({
     contacts: [
       {
         id: 122345,
-        name: "Marko Markić",
+        name: "Marko Marki",
         email: "marko@marko.com",
-        phones: ["+385 95 478 8273", "+383 91 787 7671"],
+        phones: ["478 8273", "91 787 7671"],
         avatar: "https://avatars0.githubusercontent.com/u/9064066?v=4&s=460"
       },
       {
         id: 122346,
-        name: "Ivan Ivandić",
+        name: "Ivan Ivandi",
         email: "ivan@ivan.com",
         phones: ["+383 91 787 7671"],
         avatar: "https://avatars0.githubusercontent.com/u/9064066?v=4&s=460"
       },
       {
         id: 122347,
-        name: "Matija Matošin",
+        name: "Matija Matosin",
         email: "matija@matija.com",
         phones: ["+385 91 787 7123", "+385 99 789 453"],
         avatar: "https://avatars0.githubusercontent.com/u/9064066?v=4&s=460"
@@ -56,6 +60,10 @@ export const store = new Vuex.Store({
   getters: {
     getContacts(state) {
       return state.contacts;
+    },
+    getContactsCopy(state) {
+      const postDataCopy = _.cloneDeep(state.contacts);
+      return postDataCopy;
     }
   }
 });

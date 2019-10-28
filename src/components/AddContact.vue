@@ -27,17 +27,9 @@
           @blur="$v.phones.$touch()"
         ></v-text-field>
         <div class="phone-control">
-          <span
-            style="cursor:pointer;"
-            @click="addPhone(i)"
-            v-show="i == phones.length - 1"
-          >+ add phone</span>
-          <span
-            style="cursor:pointer;"
-            @click="removePhone(i)"
-            v-show="i || (!i && phones.length > 1)"
-          >- remove phone</span>
+          <span style="cursor:pointer;" @click="removePhone(i)" v-show="i">- remove phone</span>
         </div>
+        <v-btn v-show="i <= 0" @click="addPhone(i)">ADD PHONES</v-btn>
       </div>
       <div class="form-btn">
         <v-btn class="mr-4" type="submit">SAVE</v-btn>
