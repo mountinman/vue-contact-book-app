@@ -55,7 +55,7 @@ import Pagination from "./Pagination.vue";
 export default {
   data() {
     return {
-      pageSize: 4,
+      pageSize: 2,
       currentPage: 0,
       showedContacts: []
     };
@@ -97,7 +97,7 @@ export default {
 .container {
   padding: 30px;
   max-width: 800px;
-  margin: 0 auto;
+  margin: auto;
 }
 .v-icon.v-icon {
   font-size: 19px;
@@ -114,7 +114,7 @@ a.view-more-btn {
   font-size: 13px;
 }
 .v-item-group {
-  margin-top: 100px;
+  margin-top: 50px;
 }
 .v-card__text,
 .v-card__title {

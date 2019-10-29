@@ -1,31 +1,10 @@
 <template>
   <div class="add-contact-form">
-    <form @submit.prevent="updateContact">
-      <v-text-field
-        v-model="contact.name"
-        :error-messages="nameErrors"
-        label="Name"
-        required
-        @input="$v.name.$touch()"
-        @blur="$v.name.$touch()"
-      ></v-text-field>
-      <v-text-field
-        v-model="contact.email"
-        :error-messages="emailErrors"
-        label="E-mail"
-        required
-        @input="$v.email.$touch()"
-        @blur="$v.email.$touch()"
-      ></v-text-field>
+    <form @submit.prevent="updateContact(contact.id)">
+      <v-text-field v-model="contact.name" label="Name" required @submit="$v.name"></v-text-field>
+      <v-text-field v-model="contact.email" label="E-mail" required @submit="$v.email"></v-text-field>
       <div v-for="(phone, i) in contact.phones" :key="i">
-        <v-text-field
-          v-model="contact.phones[i]"
-          :error-messages="phoneErrors"
-          label="Phone"
-          required
-          @input="$v.phones.$touch()"
-          @blur="$v.phones.$touch()"
-        ></v-text-field>
+        <v-text-field v-model="contact.phones[i]" label="Phone" required @submit="$v.phones"></v-text-field>
         <div class="phone-control">
           <span style="cursor:pointer;" @click="removePhone(i)" v-show="i">- remove phone</span>
         </div>
@@ -63,34 +42,15 @@ export default {
   computed: {
     contact() {
       return this.contacts.find(contact => contact.id == this.id);
-    },
-    nameErrors() {
-      const errors = [];
-      if (!this.$v.name.$dirty) return errors;
-      !this.$v.name.maxLength &&
-        errors.push("Name must be at most 10 characters long");
-      !this.$v.name.required && errors.push("Name is required.");
-      return errors;
-    },
-    emailErrors() {
-      const errors = [];
-      if (!this.$v.email.$dirty) return errors;
-      !this.$v.email.email && errors.push("Must be valid e-mail");
-      !this.$v.email.required && errors.push("E-mail is required");
-      return errors;
-    },
-    phoneErrors() {
-      const errors = [];
-      if (!this.$v.phones.$dirty) return errors;
-      !this.$v.phones.required && errors.push("Phone is required");
-      return errors;
     }
   },
   methods: {
     addPhone(index) {
       this.contact.phones.push(this.contact.phones[index].phone);
     },
-    updateContact() {
+    updateContact(id) {
+      let contact = this.contacts.find(contact => contact.id == id);
+      this.$store.commit("updateContact", contact);
       this.$router.push("/");
     },
     removePhone(index) {

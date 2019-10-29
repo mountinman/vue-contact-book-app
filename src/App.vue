@@ -22,17 +22,25 @@ export default {
     return {
       dynamicMenu: [
         { 
-          icon: "mdi-home", 
-          title: "HOME", 
+          icon: "mdi-account-circle", 
+          title: "CONTACTS", 
           link: "/" 
         },
         {
           icon: "mdi-account-card-details-outline",
           title: "ADD CONTACT",
           link: "/add-contact"
+        },
+        {
+          icon: "mdi-file-find-outline",
+          title: "FIND CONTACT",
+          link: "/find-contact"
         }
       ]
     };
+  },
+  created(){
+    // localStorage.clear();
   }
 };
 </script>

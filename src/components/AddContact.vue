@@ -33,7 +33,7 @@
       </div>
       <div class="form-btn">
         <v-btn class="mr-4" type="submit">SAVE</v-btn>
-        <v-btn @click="clear">CLEAR</v-btn>
+        <v-btn @click="cancelAdd">CANCEL</v-btn>
       </div>
     </form>
   </div>
@@ -104,11 +104,12 @@ export default {
     submit() {
       this.$v.$touch();
     },
-    clear() {
+    cancelAdd() {
       this.$v.$reset();
       this.name = "";
       this.email = "";
       this.phones = [""];
+      this.$router.push('/')
     }
   }
 };
