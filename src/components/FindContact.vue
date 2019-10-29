@@ -64,9 +64,7 @@ export default {
     }
   },
   methods: {
-    clik() {
-      console.log(this.contacts);
-    }
+    
   }
 };
 </script>

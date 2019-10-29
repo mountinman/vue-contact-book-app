@@ -10,7 +10,15 @@ Vue.use(Vuex);
 export const store = new Vuex.Store({
   plugins: [VuexLocalStorage],
   state: {
-    contacts: [],
+    contacts: [
+    {
+      id:12345,
+      name:'Ivan Ivanic',
+      email:'ivan@ivan.com',
+      phones:['112423432'],
+      avatar:'https://avatars0.githubusercontent.com/u/9064066?v=4&s=460'
+    }
+  ],
     copyContacts: []
   },
 
@@ -28,13 +36,12 @@ export const store = new Vuex.Store({
       newContact.id = newId;
       state.contacts.push(newContact);
     },
-    updateContact(state, newContact) {
-      let oldContact = state.contacts.find(
-        contact => contact.id == newContact.id
-      );
+     updateContact(state, newContact) {
+      let oldContact = state.contacts.find(contact => contact.id == newContact.id);
       const indexOfOldContact = state.contacts.indexOf(oldContact);
-      state.contacts.splice(indexOfOldContact, 1, newContact);
-    }
+      state.contacts.splice(indexOfOldContact, 1, newContact)
+      
+     }
   },
   actions: {},
   getters: {
@@ -43,7 +50,9 @@ export const store = new Vuex.Store({
     },
     getContactsCopy(state) {
       let postDataCopy = _.cloneDeep(state.contacts);
-      return (state.copyContacts = postDataCopy);
+      return state.copyContacts = postDataCopy;
+
     }
   }
+  
 });
